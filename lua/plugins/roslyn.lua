@@ -1,10 +1,13 @@
 return {
     "seblyng/roslyn.nvim",
     ft = "cs",
-    ---@module 'roslyn.config'
-    ---@type RoslynNvimConfig
-    opts = {
-        -- your configuration comes here; leave empty for default settings
-    },
-}
+    opts = {},
 
+    config = function(_, opts)
+        require("roslyn").setup(opts)
+
+        vim.lsp.config("roslyn", {
+            capabilities = require("cmp_nvim_lsp").default_capabilities(),
+        })
+    end,
+}
